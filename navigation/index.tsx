@@ -6,6 +6,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import { HomeScreen } from '../screens/HomeScreen';
 import { PlannerScreen } from '../screens/PlannerScreen';
+import { WorkoutDetailScreen } from '../screens/WorkoutDetailScreen';
 
 export const Navigation = () => {
   return (
@@ -22,7 +23,17 @@ const Stack = createNativeStackNavigator();
 const RootNavigator: FunctionComponent<RootNavigatorProps> = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen
+        name="Root"
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="WorkoutDetail"
+        component={WorkoutDetailScreen}
+        options={{ title: 'Workout Info' }}
+      />
     </Stack.Navigator>
   );
 };

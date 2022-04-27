@@ -1,13 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import { View, Text, Button } from 'react-native';
-import { NativeStackHeaderProps, NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ParamListBase } from '@react-navigation/native';
 
 interface PlannerScreenProps {
   navigation: NativeStackNavigationProp<ParamListBase>;
 }
 
-export const PlannerScreen: FunctionComponent<PlannerScreenProps> = ({ navigation }) => {
+export const PlannerScreen: FunctionComponent<PlannerScreenProps> = ({
+  navigation,
+}) => {
   return (
     <View>
       <Text>I am planner screen</Text>

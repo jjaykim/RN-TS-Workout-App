@@ -1,30 +1,25 @@
 import React, { FunctionComponent } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 
 import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
+import { Modal } from '../components/Styled/Modal';
 import { PressableText } from '../components/Styled/PressableText';
 
-//TODO: route에 커스텀 parameter 추가하는 방법
-//FIXME: route에 커스텀 parameter 추가하는 방법
-
-//MEMO: sdfasdfksjdflk
+// NOTE: route에 커스텀 parameter 추가하는 방법
 type WorkoutDetailParamList = {
   WorkoutDetail: { slug: string };
 };
 
-type WorkoutDetailRouteProp = RouteProp<
-  WorkoutDetailParamList,
-  'WorkoutDetail'
->;
+type WorkoutDetailRouteProp = RouteProp<WorkoutDetailParamList, 'WorkoutDetail'>;
 
 interface WorkoutDetailScreenProps {
   route: WorkoutDetailRouteProp;
 }
 
-export const WorkoutDetailScreen: FunctionComponent<
-  WorkoutDetailScreenProps
-> = ({ route }) => {
+export const WorkoutDetailScreen: FunctionComponent<WorkoutDetailScreenProps> = ({
+  route,
+}) => {
   const workout = useWorkoutBySlug(route.params.slug);
 
   if (!workout) return null;
@@ -32,10 +27,14 @@ export const WorkoutDetailScreen: FunctionComponent<
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{workout.name}</Text>
-      <PressableText
-        onPress={() => alert('Opening modal')}
-        text="Check Sequence"
+
+      <Modal
+        activator={({ hadndleOpen }) => (
+          <PressableText onPress={hadndleOpen} text="Check Sequence" />
+        )}
       />
+
+      <Modal />
     </View>
   );
 };

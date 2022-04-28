@@ -1,18 +1,26 @@
 import React, { FunctionComponent } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { Workout } from '../../types/data';
 import { formatSec, secToMin } from '../../utils/time';
 
 interface WorkoutItemProps {
   item: Workout;
+  children?: React.ReactNode;
+  childStyles?: StyleProp<ViewStyle>;
 }
 
-export const WorkoutItem: FunctionComponent<WorkoutItemProps> = ({ item }) => {
+export const WorkoutItem: FunctionComponent<WorkoutItemProps> = ({
+  item,
+  children,
+  childStyles,
+}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.name}>{item.name}</Text>
       <Text style={styles.duration}>Duration: {formatSec(item.duration)}</Text>
       <Text style={styles.difficulty}>Difficulty: {item.difficulty}</Text>
+
+      {children && <View style={childStyles}>{children}</View>}
     </View>
   );
 };

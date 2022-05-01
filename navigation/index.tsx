@@ -1,16 +1,21 @@
 import React, { FunctionComponent } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
+import { ColorSchemeName } from 'react-native';
 
 import { HomeScreen } from '../screens/HomeScreen';
 import { PlannerScreen } from '../screens/PlannerScreen';
 import { WorkoutDetailScreen } from '../screens/WorkoutDetailScreen';
 
-export const Navigation = () => {
+interface NavigationProps {
+  colorScheme: ColorSchemeName;
+}
+
+export const Navigation: FunctionComponent<NavigationProps> = ({ colorScheme }) => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={colorScheme == 'light' ? DefaultTheme : DarkTheme}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -56,6 +61,7 @@ const BottomTabNavigator = () => {
         name="Planner"
         component={PlannerScreen}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ color, size }) => {
             return <FontAwesome name="calendar" size={size} color={color} />;
           },

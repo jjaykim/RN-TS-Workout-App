@@ -5,9 +5,12 @@ import { PressableText } from './PressableText';
 
 interface ModalProps {
   activator?: FunctionComponent<{
-    hadndleOpen: () => void;
+    handleOpen: () => void;
   }>;
-  children: React.ReactNode;
+  children: FunctionComponent<{
+    handleOpen: () => void;
+    handleClose: () => void;
+  }>;
 }
 
 export const Modal: FunctionComponent<ModalProps> = ({
@@ -16,23 +19,23 @@ export const Modal: FunctionComponent<ModalProps> = ({
 }) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
+  const handleOpen = () => setModalVisible(true);
+  const handleClose = () => setModalVisible(false);
+
   return (
     <>
       <DefaultModal visible={isModalVisible} transparent={false} animationType="slide">
         <View style={styles.centerView}>
-          <View style={styles.contentView}>{children}</View>
+          <View style={styles.contentView}>{children({ handleOpen, handleClose })}</View>
 
-          <PressableText onPress={() => setModalVisible(false)} text="CLOSE" />
+          <PressableText onPress={handleClose} text="CLOSE" />
         </View>
       </DefaultModal>
 
       {Activator ? (
-        <Activator hadndleOpen={() => setModalVisible(true)} />
+        <Activator handleOpen={handleOpen} />
       ) : (
-        <PressableText
-          onPress={() => setModalVisible(true)}
-          text="OPEN Not using handleOpen"
-        />
+        <PressableText onPress={handleOpen} text="OPEN Not using handleOpen" />
       )}
     </>
   );

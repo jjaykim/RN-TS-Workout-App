@@ -34,13 +34,12 @@ export const ExerciseForm: FunctionComponent<ExerciseFormProps> = ({ onSubmit })
 
   return (
     <View style={styles.container}>
-      <Text>Exercise Form</Text>
-
       <View>
         <TextInput
           value={form.name}
           style={styles.input}
           onChangeText={onChangeText('name')}
+          placeholderTextColor="rgba(0, 0, 0, 0.4)"
           placeholder="Name"
           returnKeyType="next"
         />
@@ -49,6 +48,7 @@ export const ExerciseForm: FunctionComponent<ExerciseFormProps> = ({ onSubmit })
           value={form.duration}
           style={styles.input}
           onChangeText={onChangeText('duration')}
+          placeholderTextColor="rgba(0, 0, 0, 0.4)"
           placeholder="Duration"
           returnKeyType="next"
         />
@@ -57,6 +57,7 @@ export const ExerciseForm: FunctionComponent<ExerciseFormProps> = ({ onSubmit })
           value={form.reps}
           style={styles.input}
           onChangeText={onChangeText('reps')}
+          placeholderTextColor="rgba(0, 0, 0, 0.4)"
           placeholder="Repetitions"
           returnKeyType="next"
         />
@@ -81,13 +82,15 @@ export const ExerciseForm: FunctionComponent<ExerciseFormProps> = ({ onSubmit })
               value={form.type}
               onPressIn={() => setIsSelectionOn(true)}
               style={styles.input}
+              placeholderTextColor="rgba(0, 0, 0, 0.4)"
               placeholder="Type"
             />
           )}
         </View>
 
         <PressableText
-          text="Submit"
+          style={{ marginTop: 15 }}
+          text="Add Exercise"
           onPress={() => {
             onSubmit(form);
             setForm({ name: '', duration: '', type: '', reps: '' });

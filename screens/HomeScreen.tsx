@@ -5,20 +5,19 @@ import { ParamListBase } from '@react-navigation/native';
 
 import { WorkoutItem } from '../components/workoutItem/WorkoutItem';
 import { useWorkouts } from '../hooks/useWorkouts';
+import { ThemeText } from '../components/Styled/ThemeText';
 // import { AksharText } from '../components/Styled/AksharText';
 
 interface HomeScreenProps {
   navigation: NativeStackNavigationProp<ParamListBase>;
 }
 
-export const HomeScreen: FunctionComponent<HomeScreenProps> = ({
-  navigation,
-}) => {
+export const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
   const workouts = useWorkouts();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>New Work Out</Text>
+      <ThemeText style={styles.header}>New Work Out</ThemeText>
 
       {/*REVIEW: Prop와 Children을 인자로 넘겨주는 연습 */}
       {/* <AksharText style={{ color: '#bcbf24', marginBottom: 10 }} onPress={() => console.log('hi')}>
@@ -32,9 +31,7 @@ export const HomeScreen: FunctionComponent<HomeScreenProps> = ({
         renderItem={({ item }) => {
           return (
             <Pressable
-              onPress={() =>
-                navigation.navigate('WorkoutDetail', { slug: item.slug })
-              }
+              onPress={() => navigation.navigate('WorkoutDetail', { slug: item.slug })}
             >
               <WorkoutItem item={item} />
             </Pressable>

@@ -62,23 +62,25 @@ export const WorkoutDetailScreen: FunctionComponent<WorkoutDetailScreenProps> = 
     <View style={styles.container}>
       <WorkoutItem item={workout} childStyles={{ marginTop: 10 }}>
         <Modal
-          activator={({ hadndleOpen }) => (
-            <PressableText onPress={hadndleOpen} text="Check Sequence" />
+          activator={({ handleOpen }) => (
+            <PressableText onPress={handleOpen} text="Check Sequence" />
           )}
         >
-          <View>
-            {workout.sequence.map((si, idx) => (
-              <View key={si.slug} style={styles.seqenceItem}>
-                <Text>
-                  {si.name} | {si.type} | {formatSec(si.duration)}
-                </Text>
+          {() => (
+            <View>
+              {workout.sequence.map((si, idx) => (
+                <View key={si.slug} style={styles.seqenceItem}>
+                  <Text>
+                    {si.name} | {si.type} | {formatSec(si.duration)}
+                  </Text>
 
-                {idx !== workout.sequence.length - 1 && (
-                  <FontAwesome name="arrow-down" size={20} />
-                )}
-              </View>
-            ))}
-          </View>
+                  {idx !== workout.sequence.length - 1 && (
+                    <FontAwesome name="arrow-down" size={20} />
+                  )}
+                </View>
+              ))}
+            </View>
+          )}
         </Modal>
       </WorkoutItem>
 
